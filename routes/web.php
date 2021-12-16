@@ -20,7 +20,10 @@ Route::get('/', function () {
 });
 
 Route::prefix('product')->group(function () {
-    Route::get('/' ,[ProductController::class, 'index']);
+    Route::get('/' ,    [ProductController::class, 'index']);
     Route::get('/create', [ProductController::class , 'create']);
-    Route::post('/create/post', [ProductController::class , 'post' ]);
+    Route::post('/create/post', [ProductController::class , 'store' ]);
+    Route::get('/update/{product:id}', [ProductController::class, 'show']);
+    Route::post('/update/{product:id}/updated', [ProductController::class, 'update']);
+    Route::delete('/delete/{product:id}/', [ProductController::class, 'destroy']);
 });

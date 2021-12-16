@@ -26,21 +26,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Minuman'
         ]);
 
-        Product::create([
-            'name' => 'Indomie  Goreng',
-            'price' => '5000',
-            'category_id' => 1
+        Category::create([
+            'name' => 'Sembako'
         ]);
-        Product::create([
-            'name' => 'Bihun Kuah',
-            'price' => '6000',
-            'category_id' => 1
-        ]);
-        Product::create([
-            'name' => 'Teh Gelas',
-            'price' => '2000',
-            'category_id' => 1
-        ]);
+
 
     }
 }

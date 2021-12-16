@@ -4,7 +4,7 @@
 <style>
 .img {
     height: 300px;
-    border: 2px solid black;
+
     border-radius: 20px;
 }
 
