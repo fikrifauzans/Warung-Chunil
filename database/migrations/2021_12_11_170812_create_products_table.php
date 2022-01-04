@@ -17,11 +17,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description', 100)->nullable()->default('text');
-            $table->integer('qty');
             $table->integer('category_id');
             $table->integer('purchase_price');
             $table->integer('selling_price');
-
             $table->timestamps();
 
 
