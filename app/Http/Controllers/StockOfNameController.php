@@ -24,7 +24,6 @@ class StockOfNameController extends Controller
 
     public function create()
     {
-
         return view('user.createStockOfName', [
             'products' => Product::all()
         ]);
@@ -32,10 +31,8 @@ class StockOfNameController extends Controller
 
     public function post(Request $request)
     {
-
         try {
             DB::beginTransaction();
-
             $name           = $request->name;
             $qty            = $request->qty;
             $category       = $request->category;
@@ -43,7 +40,6 @@ class StockOfNameController extends Controller
             $selling_price  = $request->selling_price;
             $newsot = new StockOfName();
             $newsot->save();
-
             for ($i = 0; $i < count($name); $i++) {
                 $sot = new StockOfNameProduct();
                 $sot->name                  = $name[$i];
@@ -58,15 +54,12 @@ class StockOfNameController extends Controller
                 $sot->stockofname_id        = $newsot->id;
                 $sot->save();
             }
-
             DB::commit();
         } catch (\Throwable $th) {
             \Log::info('error di controller stock of name');
             DB::rollback();
             return back()->with('error', 'Error bro');
         }
-
-
         return redirect('/stockofname/post/' . $newsot->id);
     }
 
@@ -83,7 +76,7 @@ class StockOfNameController extends Controller
     {
         $stockofnameproducts = StockOfNameProduct::where('stockofname_id', $stockofname->id)
             ->get();
-        foreach($stockofnameproducts as $product){
+        foreach ($stockofnameproducts as $product) {
             $product->delete();
         }
         $stockofname->delete();
