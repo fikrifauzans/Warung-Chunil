@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\User;
 
 
 class DatabaseSeeder extends Seeder
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\Product::factory(30)->create();
 
         Category::create([
             'name' => 'Makanan'
@@ -31,5 +32,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        User::create([
+            'name' => 'Shilvie Dewi',
+            'username' => 'vanillashopia',
+            'email' => 'fikrifauzans.goku@gmail.com',
+            'password' => bcrypt('vanilla')
+
+        ]);
     }
 }

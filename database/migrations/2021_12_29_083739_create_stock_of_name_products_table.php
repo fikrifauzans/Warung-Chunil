@@ -17,7 +17,7 @@ class CreateStockOfNameProductsTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('category')->nullable();
-            $table->integer('qty');
+            $table->integer('qty')->nullable();
             $table->integer('purchase_price')->nullable();
             $table->integer('selling_price')->nullable();
             $table->integer('profit')->nullable();

@@ -13,7 +13,7 @@ class StockOfNameController extends Controller
 
     public function index()
     {
-        $stockofname = StockOfName::latest()->get();
+        $stockofname = StockOfName::latest()->paginate(6);
         $number = 0;
         // dd($products);
         return view('user.stockofname', [

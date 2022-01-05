@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StockOfNameController;
 use App\Models\StockOfName;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -18,11 +20,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('user.home');
-});
 
-Route::prefix('product')->group(function () {
+Route::get('/signin', [LoginController::class, 'show'])->middleware('guest')->name('signin');
+Route::post('/signin/registration', [LoginController::class, 'auth']);
+Route::post('/logout',[LoginController::class, 'logout']);
+
+Route::get('/',  function () {
+    return view('user.home');
+})->middleware('auth');
+
+
+Route::prefix('product')->middleware('auth')->group(function () {
     Route::get('/' ,    [ProductController::class, 'index']);
     Route::get('/create', [ProductController::class , 'create']);
     Route::post('/create/post', [ProductController::class , 'store' ]);
@@ -31,10 +39,14 @@ Route::prefix('product')->group(function () {
     Route::delete('/delete/{product:id}/', [ProductController::class, 'destroy']);
 });
 
-Route::prefix('stockofname')->group(function () {
+Route::prefix('stockofname')->middleware('auth')->group(function () {
     Route::get('/' , [StockOfNameController::class, 'index']);
     Route::get('/create' , [StockOfNameController::class, 'create']);
     Route::post('/post' , [StockOfNameController::class, 'post']);
     Route::get('/post/{stockofname:id}' ,[StockOfNameController::class, 'show']);
     Route::post('/delete/{stockofname:id}' ,[StockOfNameController::class, 'destroy']);
 });
+
+
+
+

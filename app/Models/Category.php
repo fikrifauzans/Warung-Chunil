@@ -20,7 +20,7 @@ class Category extends Model
      */
     public function products()
     {
-        return $this->hasMany(Product::class, 'foreign_key', 'local_key');
+        return $this->belongsTo(Product::class, 'category_id', 'id');
     }
 
 }
