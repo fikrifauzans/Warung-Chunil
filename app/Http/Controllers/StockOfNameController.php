@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
+
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StockOfNameProductExport as ExportsStockOfNameProductExport;
 use App\Models\Product;
 use App\Models\StockOfName;
 use App\Models\StockOfNameProduct;
@@ -21,14 +26,12 @@ class StockOfNameController extends Controller
             'number' => $number
         ]);
     }
-
     public function create()
     {
         return view('user.createStockOfName', [
             'products' => Product::all()
         ]);
     }
-
     public function post(Request $request)
     {
         try {
@@ -62,7 +65,6 @@ class StockOfNameController extends Controller
         }
         return redirect('/stockofname/post/' . $newsot->id);
     }
-
     public function show(StockOfName $stockofname)
     {
         $stockOfName = $stockofname;
@@ -81,5 +83,16 @@ class StockOfNameController extends Controller
         }
         $stockofname->delete();
         return redirect('/stockofname');
+    }
+
+
+    public function download(StockOfName $stockofname)
+    {
+        $stockofname_id = $stockofname->id;
+        $products = StockOfNameProduct::where('stockofname_id', $stockofname_id)
+            ->get();
+        $SOT =  new ExportsStockOfNameProductExport($products);
+        return Excel::download($SOT, 'stockofnames.xlsx');
+
     }
 }

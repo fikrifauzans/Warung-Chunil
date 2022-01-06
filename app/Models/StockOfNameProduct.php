@@ -32,4 +32,6 @@ class StockOfNameProduct extends Model
         return $this->belongsTo(StockOfName::class, 'stockofname_id','id');
     }
 
+
+
 }

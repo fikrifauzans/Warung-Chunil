@@ -1,4 +1,13 @@
 @extends('layouts.master')
+@section('l1')
+    Product
+@endsection
+@section('a1')
+    /product
+@endsection
+@section('l2')
+    Create Product
+@endsection
 @section('contain')
 <style>
     label ,h3{

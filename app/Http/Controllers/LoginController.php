@@ -20,16 +20,22 @@ class LoginController extends Controller
 
     public function auth(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required', 'email',
-            'password' => ['required'],
+        $input = $request->all();
+
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('product');
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
+        {
+
+            return redirect('product')->with('message' , 'Anda berhasil Login!');
+        }else{
+            return redirect()->route('login')
+                ->with('error','Email-Address And Password Are Wrong.');
         }
-        return back()->withErrors('masukan kembali email dan password');
     }
 
     public function logout(Request $request)

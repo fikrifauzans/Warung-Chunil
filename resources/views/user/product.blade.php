@@ -1,4 +1,10 @@
 @extends('layouts.master')
+@section('l1')
+    Product
+@endsection
+@section('a1')
+    /product
+@endsection
 @section('contain')
 
     @if ($products->isEmpty())
@@ -131,7 +137,23 @@
 
 
         <!-- ./wrapper -->
-        <div class="container-fluid  mx-1 mt-3">
+        @if (session('message'))
+        <div class="container-fluid mx-1">
+            <div class="row justify-content-start" >
+                <div class="col-md-6">
+                    <div class="alert alert-light text-success border-success alert-dismissible fade show" role="alert">
+                        {{session('message')}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+
+        @endif
+        <div class="container-fluid  mx-1" >
             <div class="row justify-content-between align-items-center">
                 @section('title')
                     List Product
@@ -141,7 +163,7 @@
             <div class="container">
                 <div class="row d-flex justify-content-between align-items-center">
                     <div class="add-product">
-                        <a href="/product/create" class="btn btn-success my-3 float-left float-right">
+                        <a href="/product/create" class="btn btn-success  float-left float-right">
                             <span class=' fas fa-plus-square'></span> Tambah Produk</a>
                     </div>
 
@@ -154,7 +176,7 @@
                             <form class="form-inline" action="/product" method="get">
                                 <input value="{{ Request::old('search') }}" class="form-control mr-sm-2" name="search"
                                     type="search" placeholder="Cari produk" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
+                                <button class="btn btn-outline-success  my-sm-0" type="submit">Cari</button>
                             </form>
                         </nav>
                     </div>
@@ -188,29 +210,30 @@
                                     <ul class="d-inline-block">
                                         <li class="d-inline-block">
                                             <a class="text-warning" href="/product/update/{{ $product->id }}"><i
-                                                class="p-1 rounded  far fa-edit"></i>
+                                                    class="p-1 rounded  far fa-edit"></i>
                                             </a>
                                         </li>
                                         <li class="d-inline-block">
-                                    <form action="product/delete/{{ $product->id }}" method="post">
-                                        <button id="button-del" class=" list-unstyled"><i class="text-danger p-1 rounded fas fa-trash-alt"></i>
-                                        </button>
-                                        @csrf
-                                        @method('delete')
-                                    </form>
-                                    <style>
-                                        #button-del {
-                                            background: none;
-                                            color: inherit;
-                                            border: none;
-                                            padding: 0;
-                                            font: inherit;
-                                            cursor: pointer;
-                                            outline: inherit;
-                                        }
+                                            <form action="product/delete/{{ $product->id }}" method="post">
+                                                <button id="button-del" class=" list-unstyled"><i
+                                                        class="text-danger p-1 rounded fas fa-trash-alt"></i>
+                                                </button>
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                            <style>
+                                                #button-del {
+                                                    background: none;
+                                                    color: inherit;
+                                                    border: none;
+                                                    padding: 0;
+                                                    font: inherit;
+                                                    cursor: pointer;
+                                                    outline: inherit;
+                                                }
 
-                                    </style>
-                                            </li>
+                                            </style>
+                                        </li>
                                     </ul>
 
                                 </td>

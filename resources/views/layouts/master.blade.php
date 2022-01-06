@@ -51,8 +51,9 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard v1</li>
+                <li class="breadcrumb-item"><a href="@yield('a1')">@yield('l1')</a></li>
+                <li class="breadcrumb-item active">@yield('l2')</li>
+                @yield('y3')
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->

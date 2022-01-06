@@ -14,18 +14,13 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 
-        $category = Category::where('name', 'like', '%' . $request['search'] .  '%')->get();
-        $category_id = $category->collect()->first()->id;
 
         $products = Product::latest();
 
-        if ($category_id !== null) {
-            $products->where('category_id', 'like', '%' . $category_id . '%');
-        } else  {
             $products
                 ->Where('description', 'like', '%' . $request['search'] . '%')
                 ->orWhere('name', 'like', '%' . $request['search'] . '%');
-        }
+
         session()->flashInput($request->input());
         return view('user.product', [
             'products' => $products->paginate(5)->withQueryString(),

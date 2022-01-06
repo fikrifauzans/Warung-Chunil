@@ -53,7 +53,7 @@
             <h5 class="h5 my-2 fw-normal text-start">Please Login</h5>
 
             <div class="form-floating">
-                <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input name="username"  type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
                 <label  for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">

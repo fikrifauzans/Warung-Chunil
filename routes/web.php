@@ -24,12 +24,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/signin', [LoginController::class, 'show'])->middleware('guest')->name('signin');
 Route::post('/signin/registration', [LoginController::class, 'auth']);
 Route::post('/logout',[LoginController::class, 'logout']);
-
 Route::get('/',  function () {
-    return view('user.home');
+    return redirect('/product');
 })->middleware('auth');
-
-
 Route::prefix('product')->middleware('auth')->group(function () {
     Route::get('/' ,    [ProductController::class, 'index']);
     Route::get('/create', [ProductController::class , 'create']);
@@ -38,12 +35,12 @@ Route::prefix('product')->middleware('auth')->group(function () {
     Route::post('/update/{product:id}/updated', [ProductController::class, 'update']);
     Route::delete('/delete/{product:id}/', [ProductController::class, 'destroy']);
 });
-
 Route::prefix('stockofname')->middleware('auth')->group(function () {
     Route::get('/' , [StockOfNameController::class, 'index']);
     Route::get('/create' , [StockOfNameController::class, 'create']);
     Route::post('/post' , [StockOfNameController::class, 'post']);
     Route::get('/post/{stockofname:id}' ,[StockOfNameController::class, 'show']);
+    Route::get('/download/{stockofname:id}' , [StockOfNameController::class, 'download']);
     Route::post('/delete/{stockofname:id}' ,[StockOfNameController::class, 'destroy']);
 });
 

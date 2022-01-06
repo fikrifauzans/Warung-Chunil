@@ -2,6 +2,13 @@
 @section('title')
     Stock Of Name
 @endsection
+@section('l1')
+    Stock Of Name
+@endsection
+@section('a1')
+/stockofname
+@endsection
+
 
 
 
@@ -128,27 +135,26 @@
         <div class="container border-top mt-3">
             <div class="row justify-content-center">
                 @foreach ($stockofname as $sot)
-                    <div class="col-lg-3 card text-white bg-dark mx-2 my-3 pb-3 pt-2" style="max-width: 16rem;">
+                    <div class="col-lg-3 card text-white bg-light shadow mx-2 my-3 pb-3 pt-2" style="max-width: 16rem;">
                         <div class="mt-2  d-flex justify-content-between ">
                             <div>
-                                <h5 class="text-warning ml-3">{{ $sot->created_at->format('j F Y  ') }}</h5>
+                                <h5 class="text-dark ml-3">{{ $sot->created_at->format('j F Y  ') }}</h5>
                             </div>
                             <div>
                                 <form action="/stockofname/delete/{{ $sot->id }}" method="post">@csrf
-                                    <button type="submit" id="btn-del"><i
-                                            class="bg-danger p-1 align-self-start rounded fas fa-trash-alt"></i></button>
+                                    <button  type="submit" id="btn-del"><i
+                                            class=" text-danger p-1 align-self-start rounded fas fa-trash-alt"></i></button>
                                 </form>
                             </div>
                         </div>
                         <div class="card-body">
 
                             <p class="card-text">Ringkasan Stock Of Name pada tanggal
-                                {{ $sot->created_at->format('j F Y  ') }} pada pukul
-                                {{ $sot->created_at->format('h:i:s') }} </p>
+                                {{ $sot->created_at->format('j F Y  ') }}
                             <small>{{ $sot->created_at->diffforhumans() }}</small>
                         </div>
                         <form action="/stockofname/post/{{ $sot->id }}">
-                            <button type="submit" class="btn btn-warning w-100">Lihat Rincian</button>
+                            <button type="submit" class="shadow btn btn-success w-100">Lihat Rincian</button>
                         </form>
                     </div>
                 @endforeach
